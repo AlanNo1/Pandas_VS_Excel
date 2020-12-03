@@ -38,7 +38,7 @@ def concat_files_multi(folder_path):
 
 #读取Excel追加到dataframe列表方法
 def read_file(afn,df_list):
-    df = pd.read_excel(afn).rename(columns={'hometel1':'HOMETEL1'})
+    df = pd.read_excel(afn).rename(columns={'id':'ID'})
     df_list.append(df)
 
  #信息匹配，多表关联
@@ -56,7 +56,7 @@ def concatdata(folder_path,needSheet):
     #需要匹配的号码
     for No in needSheet:
         dfno = pd.read_excel(f"{folder_path}.xlsx",sheet_name=No)
-        new = pd.merge(dfno,df_all,on = "HOMETEL1")#按列"HOMETEL1"匹配
+        new = pd.merge(dfno,df_all,on = "ID")#按列"ID"匹配
         # 将合并结果保存到excel文件
         new.to_excel(f"{folder_path}__{No}匹配后.xlsx",index=False) 
     print("已完成表格匹配!")    
