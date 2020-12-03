@@ -45,7 +45,7 @@ def concatdata(mydir,needNO):
     #需要匹配的号码
     for No in needNO:
         dfno = pd.read_excel(f"{prpjiectName}.xlsx",sheet_name=No)
-        new = pd.merge(dfno,result,on = "ID").dropna(axis=1,how='all')#根据老王ID这列匹配班级和课程
+        new = pd.merge(dfno,result,on = "ID").dropna(axis=1,how='all')#根据老王ID这列匹配班级和课程，并删除空列
         # 将合并结果保存到excel文件
         new.to_excel(f"{prpjiectName}__{No}匹配后.xlsx",index=False) 
     print("已完成表格匹配!")
