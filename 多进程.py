@@ -62,6 +62,6 @@ def concatdata(folder_path,needSheet):
     print("已完成表格匹配!")    
 
 if __name__ == '__main__':
-    folder_path = "浙江"
+    folder_path = "老王信息表"
     renameexcel(folder_path)
-    concatdata(folder_path,['个人'])#folder_path是要匹配的目录和Excel文件，列表中是Excel文件中要匹配的sheet
+    concatdata(folder_path,['班级','个人'])#folder_path是要匹配的目录和Excel文件，列表中是Excel文件中要匹配的sheet
