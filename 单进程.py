@@ -26,14 +26,14 @@ def finddir(mydir):
     for filename in filelist:
         i = i+1
         filepath = os.path.join(mydir,filename)
-        df = pd.read_excel(filepath).rename(columns={'hometel1':'HOMETEL1'})
+        df = pd.read_excel(filepath).rename(columns={'id':'ID'})
         print(f"第{i}个文件：{time.strftime('%Y年%m月%d日 %X 秒',time.localtime())}:{filename}读取完毕！-----------------------------")
         dfs.append(df)
     return dfs    
 
 def concatdata(mydir,needNO): 
     dfList = finddir(mydir)
-    # 合并所有数据
+    # 合并所有班级、课程数据
     result = pd.concat(dfList,ignore_index=True)
     # 输出合并数据到csv文件
     #result.to_csv(f'C:/Users/Administrator/Desktop/mydir.csv',index=False)
@@ -45,13 +45,13 @@ def concatdata(mydir,needNO):
     #需要匹配的号码
     for No in needNO:
         dfno = pd.read_excel(f"{prpjiectName}.xlsx",sheet_name=No)
-        new = pd.merge(dfno,result,on = "HOMETEL1").dropna(axis=1,how='all')
+        new = pd.merge(dfno,result,on = "ID").dropna(axis=1,how='all')#根据老王ID这列匹配班级和课程
         # 将合并结果保存到excel文件
         new.to_excel(f"{prpjiectName}__{No}匹配后.xlsx",index=False) 
     print("已完成表格匹配!")
     
 #执行   
 if __name__ == "__main__":
-    prpjiectName ="河北"  #文件夹名称
+    prpjiectName ="老王"  #存放号码列表文件夹名称（同时也是需匹配号码的Excel名）
     renameexcel(prpjiectName)
-    concatdata(prpjiectName,['常规','专项']) #号码在“需匹配号码.xlsx”中的sheet名字列表！
+    concatdata(prpjiectName,['班级','课程']) #”老王.xlsx”中的sheet名字列表！
