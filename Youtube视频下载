@@ -1,0 +1,70 @@
+import pafy
+from multiprocessing import Pool
+
+
+'''
+pip install pafy
+pip install youtube-dl
+@brief:下载Youtube视频
+'''
+def runDownload(url):
+    #开始下载
+    video = pafy.new(url)
+    v_best =video.getbest() #下载最清晰画质
+    v_best.download(r'.\神断狄仁杰')
+
+urls=[
+'https://www.youtube.com/watch?v=pqlIhdSeIv4&list=PLH7T6qoveCXyQ_SF6_PPej3ENcgitpbXT&index=1',
+'https://www.youtube.com/watch?v=tPRHQcv1Rv4&list=PLH7T6qoveCXyQ_SF6_PPej3ENcgitpbXT&index=2',
+'https://www.youtube.com/watch?v=FlpZCcImqJs&list=PLH7T6qoveCXyQ_SF6_PPej3ENcgitpbXT&index=3',
+'https://www.youtube.com/watch?v=XYjUScDIt4U&list=PLH7T6qoveCXyQ_SF6_PPej3ENcgitpbXT&index=4',
+'https://www.youtube.com/watch?v=YpcJwAjUjfo&list=PLH7T6qoveCXyQ_SF6_PPej3ENcgitpbXT&index=5',
+'https://www.youtube.com/watch?v=zwv3_HSF-UU&list=PLH7T6qoveCXyQ_SF6_PPej3ENcgitpbXT&index=6',
+'https://www.youtube.com/watch?v=dqwfoN2SRC4&list=PLH7T6qoveCXyQ_SF6_PPej3ENcgitpbXT&index=7',
+'https://www.youtube.com/watch?v=WofKsk_XDho&list=PLH7T6qoveCXyQ_SF6_PPej3ENcgitpbXT&index=8',
+'https://www.youtube.com/watch?v=wlGhjfO7g4w&list=PLH7T6qoveCXyQ_SF6_PPej3ENcgitpbXT&index=9',
+'https://www.youtube.com/watch?v=SieEN28mVp4&list=PLH7T6qoveCXyQ_SF6_PPej3ENcgitpbXT&index=10',
+'https://www.youtube.com/watch?v=DmzReCFmWXY&list=PLH7T6qoveCXyQ_SF6_PPej3ENcgitpbXT&index=11',
+'https://www.youtube.com/watch?v=nETWMeIzlts&list=PLH7T6qoveCXyQ_SF6_PPej3ENcgitpbXT&index=12',
+'https://www.youtube.com/watch?v=OybX4HnL080&list=PLH7T6qoveCXyQ_SF6_PPej3ENcgitpbXT&index=13',
+'https://www.youtube.com/watch?v=T943RXYxRG4&list=PLH7T6qoveCXyQ_SF6_PPej3ENcgitpbXT&index=14',
+'https://www.youtube.com/watch?v=4Nb_0GyPDPU&list=PLH7T6qoveCXyQ_SF6_PPej3ENcgitpbXT&index=15',
+'https://www.youtube.com/watch?v=E0sUlZucIfk&list=PLH7T6qoveCXyQ_SF6_PPej3ENcgitpbXT&index=16',
+'https://www.youtube.com/watch?v=Ckk5EC-S4a4&list=PLH7T6qoveCXyQ_SF6_PPej3ENcgitpbXT&index=17',
+'https://www.youtube.com/watch?v=o7awCUPlscg&list=PLH7T6qoveCXyQ_SF6_PPej3ENcgitpbXT&index=18',
+'https://www.youtube.com/watch?v=On229huV_ws&list=PLH7T6qoveCXyQ_SF6_PPej3ENcgitpbXT&index=19',
+'https://www.youtube.com/watch?v=XU-HZu33g0U&list=PLH7T6qoveCXyQ_SF6_PPej3ENcgitpbXT&index=20',
+'https://www.youtube.com/watch?v=3JZfa49GRbE&list=PLH7T6qoveCXyQ_SF6_PPej3ENcgitpbXT&index=21',
+'https://www.youtube.com/watch?v=0XCxQRz3olU&list=PLH7T6qoveCXyQ_SF6_PPej3ENcgitpbXT&index=22',
+'https://www.youtube.com/watch?v=J2uujozJW5E&list=PLH7T6qoveCXyQ_SF6_PPej3ENcgitpbXT&index=23',
+'https://www.youtube.com/watch?v=DGkZi81q6Eo&list=PLH7T6qoveCXyQ_SF6_PPej3ENcgitpbXT&index=24',
+'https://www.youtube.com/watch?v=zrajPvrKsT8&list=PLH7T6qoveCXyQ_SF6_PPej3ENcgitpbXT&index=25',
+'https://www.youtube.com/watch?v=k1pJubWSu3s&list=PLH7T6qoveCXyQ_SF6_PPej3ENcgitpbXT&index=26',
+'https://www.youtube.com/watch?v=BzzXF7mIpDM&list=PLH7T6qoveCXyQ_SF6_PPej3ENcgitpbXT&index=27',
+'https://www.youtube.com/watch?v=sOGIG4qnQXI&list=PLH7T6qoveCXyQ_SF6_PPej3ENcgitpbXT&index=28',
+'https://www.youtube.com/watch?v=CwgJ0005WlQ&list=PLH7T6qoveCXyQ_SF6_PPej3ENcgitpbXT&index=29',
+'https://www.youtube.com/watch?v=e_-gWC4ixhM&list=PLH7T6qoveCXyQ_SF6_PPej3ENcgitpbXT&index=30',
+'https://www.youtube.com/watch?v=THe6omC4bI8&list=PLH7T6qoveCXyQ_SF6_PPej3ENcgitpbXT&index=31',
+'https://www.youtube.com/watch?v=SJTOETxgDS4&list=PLH7T6qoveCXyQ_SF6_PPej3ENcgitpbXT&index=32',
+'https://www.youtube.com/watch?v=_U7aOwgaDHE&list=PLH7T6qoveCXyQ_SF6_PPej3ENcgitpbXT&index=33',
+'https://www.youtube.com/watch?v=kvo5D7DfUFA&list=PLH7T6qoveCXyQ_SF6_PPej3ENcgitpbXT&index=34',
+'https://www.youtube.com/watch?v=ORqMIn6KpSQ&list=PLH7T6qoveCXyQ_SF6_PPej3ENcgitpbXT&index=35',
+'https://www.youtube.com/watch?v=l1PrkaX7uW8&list=PLH7T6qoveCXyQ_SF6_PPej3ENcgitpbXT&index=36',
+'https://www.youtube.com/watch?v=udG9aelwyVY&list=PLH7T6qoveCXyQ_SF6_PPej3ENcgitpbXT&index=37',
+'https://www.youtube.com/watch?v=eXUEFcSQMyc&list=PLH7T6qoveCXyQ_SF6_PPej3ENcgitpbXT&index=38'
+'https://www.youtube.com/watch?v=TaLcFPijQdo&list=PLH7T6qoveCXyQ_SF6_PPej3ENcgitpbXT&index=39',
+'https://www.youtube.com/watch?v=2NjwcR2cdl8&list=PLH7T6qoveCXyQ_SF6_PPej3ENcgitpbXT&index=40',
+'https://www.youtube.com/watch?v=R9STd-bsYJo&list=PLH7T6qoveCXyQ_SF6_PPej3ENcgitpbXT&index=41',
+'https://www.youtube.com/watch?v=GM7IGYzkl94&list=PLH7T6qoveCXyQ_SF6_PPej3ENcgitpbXT&index=42',
+'https://www.youtube.com/watch?v=GBVUxZ9gHLs&list=PLH7T6qoveCXyQ_SF6_PPej3ENcgitpbXT&index=43',
+'https://www.youtube.com/watch?v=C0aNLrGn-dc&list=PLH7T6qoveCXyQ_SF6_PPej3ENcgitpbXT&index=44'
+]
+
+if __name__ == '__main__':
+    '''调用方法示例'''
+    p = Pool()
+    for url in urls:
+        p.apply_async(func=runDownload,args=(url,))
+    p.close()
+    p.join()
+    print('神探狄仁杰下载完成！')        
